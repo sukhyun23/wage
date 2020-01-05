@@ -1,5 +1,5 @@
 calendar <- function(start, end) {
-  calendar_df <- data.frame(date = seq(start, end, by = 1)) 
+  calendar_df <- data.table::data.table(date = seq(start, end, by = 1)) 
   calendar_df$weekdays <- calendar_df$date %>% weekdays()
   calendar_df$weekdays <- substr(calendar_df$weekdays, 1, 1)
   calendar_df$weekdays <- factor(
@@ -9,7 +9,6 @@ calendar <- function(start, end) {
   no <- unlist(lapply(1:5, function(x) rep(x, 7)))
   calendar_df$no <- no[1:nrow(calendar_df)]
   
-  calendar_df <- data.table(calendar_df)
   calendar_df_t <- data.table::dcast.data.table(
     calendar_df, 
     formula = no~weekdays, 
@@ -22,7 +21,5 @@ calendar <- function(start, end) {
       origin = '1970-1-1'
     )
   }
-  
-  calendar_df_t <- data.table(calendar_df_t)
   return(calendar_df_t)
 }

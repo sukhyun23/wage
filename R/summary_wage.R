@@ -2,6 +2,8 @@ summary_wage <- function(data) {
   # worker_info <- readxl::read_xlsx('/home/sukhyun/wage_summary_shiny/worker_info.xlsx')
   # worker_info <- worker_info %>% data.table()
   # data <- worker_info[data, on = c('id', '이름'), nomatch = 0]
+  data <- data.table::data.table(data)
+  
   for (i in 1:ncol(data)) {
     data[[i]] <- ifelse(is.na(data[[i]]), 0, data[[i]])
   }

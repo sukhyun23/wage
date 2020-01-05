@@ -1,4 +1,6 @@
 preprocess_time <- function(data) {
+  data <- data.table::data.table(data)
+  
   # work day
   d9 <- data[
     !day %in% c('일요일', '토요일'), 
@@ -73,6 +75,7 @@ preprocess_time <- function(data) {
     list(d1, d2, d3, d4, d5, d6, d7, d8, d9)
   )
   
+  result <- data.table::data.table(result)
   for (i in 3:10) {
     result[[i]] <- ifelse(is.na(result[[i]]), 0, result[[i]])
   }

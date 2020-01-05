@@ -1,12 +1,8 @@
 preprocess_basic <- function(data, holiday_date) {
-  # data <- data_raw
-  data <- data.table(data)
+  data <- data.table::data.table(data)
   
   # change names
-  data <- data[
-    , c('번호', 'ID', '이름', '근무일자', '근무일명칭', '출근', '퇴근'), 
-    with = F
-  ]
+  data <- data[, .(번호, ID, 이름, 근무일자, 근무일명칭, 출근, 퇴근)]
   names(data) <- c('no', 'id', '이름', 'date', 'type', 'start', 'end')
   
   # fix words
@@ -31,12 +27,12 @@ preprocess_basic <- function(data, holiday_date) {
   
   data$start <- as.POSIXct(paste(data$date, data$start))
   data$end <- as.POSIXct(paste(data$date, data$end))
-  data[data$night == T, ]$end <- data[data$night == T, ]$end + 60*60*24
+  data[night == T, ]$end <- data[night == T, ]$end + 60*60*24
   
   # remove na 
-  data <- data[data$type != '휴일', ]
-  data <- data[!is.na(data$start) | !is.na(data$end), ]
-  data <- data[data$start != data$end, ]
+  data <- data[type != '휴일', ]
+  data <- data[!is.na(start) | !is.na(end), ]
+  data <- data[start != end, ]
   
   # total work hour 
   data$work_hour <- difftime(data$end, data$start, units = 'hours')
@@ -59,7 +55,7 @@ preprocess_basic <- function(data, holiday_date) {
   )
   
   # night
-  idx_tmp <- day(data$start) < day(data$end)
+  idx_tmp <- lubridate::day(data$start) < lubridate::day(data$end)
   end_tmp <- as.POSIXct(data[idx_tmp, ]$date) + 3600*21
   end_tmp <- as.POSIXct(
     ifelse(

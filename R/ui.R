@@ -1,31 +1,31 @@
 ui_app <- function() {
   # 2. header ---------------------------------------------------------------
-  header <- dashboardHeader(title = '현장 근로 관리')
+  header <- shinydashboard::dashboardHeader(title = '현장 근로 관리')
   
   
   
   # 3. sidebar --------------------------------------------------------------
-  sidebar <-   dashboardSidebar(
-    sidebarMenu(
-      menuItem(
+  sidebar <-   shinydashboard::dashboardSidebar(
+    shinydashboard::sidebarMenu(
+      shinydashboard::menuItem(
         text = "기본 정보 입력", 
         tabName = "side_basic", 
-        icon = icon('address-book')
+        icon = shiny::icon('address-book')
       ),
-      menuItem(
+      shinydashboard::menuItem(
         text = "데이터 입력", 
         tabName = "side_data", 
-        icon = icon("file")
+        icon = shiny::icon("file")
       ),
-      menuItem(
+      shinydashboard::menuItem(
         text = "요약", 
         tabName = "side_summary", 
-        icon = icon("list-alt")
+        icon = shiny::icon("list-alt")
       ),
-      menuItem(
+      shinydashboard::menuItem(
         text = "차트", 
         tabName = "side_chart", 
-        icon = icon("bar-chart-o")
+        icon = shiny::icon("bar-chart-o")
       )
     )
   )
@@ -34,7 +34,7 @@ ui_app <- function() {
   
   # 4. body -----------------------------------------------------------------
   # 4.1 (side bar) basic contents
-  basic_file_input <- fileInput(
+  basic_file_input <- shiny::fileInput(
     inputId = "basic_file_input",
     label = "사원 정보 엑셀 파일을 선택 하십시오.",
     multiple = T,
@@ -44,7 +44,7 @@ ui_app <- function() {
   )
   s <- pre_date(Sys.Date())
   e <- seq(s, length = 2, by = "months")[2] - 1
-  basic_date_input <- dateRangeInput(
+  basic_date_input <- shiny::dateRangeInput(
     inputId = "basic_date_input", 
     label = '기간을 입력하세요',
     format = "yyyy-mm-dd",
@@ -52,31 +52,28 @@ ui_app <- function() {
     start = s,
     end = e 
   )
-  # action_basic <- actionButton(
-  #   inputId = "action_basic", 
-  #   label = "확인"
-  # )
-  side_basic_content <- tabItem(
+  
+  side_basic_content <- shinydashboard::tabItem(
     tabName = "side_basic",
-    fluidRow(
-      column(
+    shiny::fluidRow(
+      shiny::column(
         width = 4, 
         basic_file_input,
-        tableOutput(outputId = 'basic_table_output')
+        shiny::tableOutput(outputId = 'basic_table_output')
         # action_basic
       ),
-      column(
+      shiny::column(
         width = 8,
         basic_date_input,
-        DTOutput(outputId = 'basic_dt_output'),
-        verbatimTextOutput('tmp_print')
+        shiny::DTOutput(outputId = 'basic_dt_output'),
+        shiny::verbatimTextOutput('tmp_print')
       )
     )
   )
   
   
   # 4.2 (side bar) input contents
-  data_file_input <- fileInput(
+  data_file_input <- shiny::fileInput(
     inputId = "data_file_input", 
     label = "계산할 엑셀 파일을 선택 하십시오.",
     multiple = T,
@@ -84,14 +81,14 @@ ui_app <- function() {
     placeholder = '선택된 파일이 없습니다.'
     # accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv")
   )
-  side_data_content <- tabItem(
+  side_data_content <- shiny::tabItem(
     tabName = "side_data",
-    fluidPage(
+    shiny::fluidPage(
       data_file_input,
-      htmlOutput(outputId = 'data_text_output'),
+      shiny::htmlOutput(outputId = 'data_text_output'),
       # textOutput(outputId = 'data_text_output'),
       br(),
-      column(
+      shiny::column(
         width = 12,
         DT::dataTableOutput(outputId = 'data_dt_output')
       )
@@ -99,11 +96,11 @@ ui_app <- function() {
   )
   
   # 4.3 (side bar) summary contents
-  side_summary_content <- tabItem(
+  side_summary_content <- shiny::tabItem(
     tabName = "side_summary",
-    fluidPage(
-      downloadButton(outputId = 'summary_down_button', label = '다운받기'),
-      column(
+    shiny::fluidPage(
+      shiny::downloadButton(outputId = 'summary_down_button', label = '다운받기'),
+      shiny::column(
         width = 12,
         DT::dataTableOutput(outputId = 'summary_dt_output')
       )
@@ -111,12 +108,12 @@ ui_app <- function() {
   )
   
   # 4.4 (side bar) chart contents
-  side_chart_content <- tabItem(
+  side_chart_content <- shiny::tabItem(
     tabName = "side_chart",
-    fluidPage(
-      column(
+    shiny::fluidPage(
+      shiny::column(
         width = 12,
-        plotOutput(outputId = 'side_chart_plot_1', height = 850)
+        shiny::plotOutput(outputId = 'side_chart_plot_1', height = 850)
       )
       # column(
       #   width = 6,
@@ -131,14 +128,14 @@ ui_app <- function() {
   
   
   # Body content
-  body <- dashboardBody( 
-    tabItems(
+  body <- shinydashboard::dashboardBody( 
+    shinydashboard::tabItems(
       side_basic_content,
       side_data_content, 
       side_summary_content,
       side_chart_content
     )
-  )  
+  )
   
-  return(dashboardPage(header, sidebar, body))
+  return(shinydashboard::dashboardPage(header, sidebar, body))
 }
