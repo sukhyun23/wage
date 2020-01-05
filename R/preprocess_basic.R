@@ -31,19 +31,19 @@ preprocess_basic <- function(data, holiday_date) {
   
   data$start <- as.POSIXct(paste(data$date, data$start))
   data$end <- as.POSIXct(paste(data$date, data$end))
-  data[night == T, ]$end <- data[night == T, ]$end + 60*60*24
+  data[data$night == T, ]$end <- data[data$night == T, ]$end + 60*60*24
   
   # remove na 
-  data <- data[type != '휴일', ]
-  data <- data[!is.na(start) | !is.na(end), ]
-  data <- data[start != end, ]
+  data <- data[data$type != '휴일', ]
+  data <- data[!is.na(data$start) | !is.na(data$end), ]
+  data <- data[data$start != data$end, ]
   
   # total work hour 
   data$work_hour <- difftime(data$end, data$start, units = 'hours')
   data$work_hour <- round(data$work_hour) %>% as.numeric()
   
   # day 
-  idx_tmp <- day(data$start) >= day(data$end)
+  idx_tmp <- lubridate::day(data$start) >= lubridate::day(data$end)
   data$base_hour_day <- 0
   data$base_hour_day[idx_tmp] <- ifelse(
     data$work_hour[idx_tmp] >= 8, 8, data$work_hour[idx_tmp]

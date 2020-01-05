@@ -3,7 +3,7 @@ preprocess_time <- function(data) {
   
   # work day
   d9 <- data[
-    !day %in% c('일요일', '토요일'), 
+    !data$day %in% c('일요일', '토요일'), 
     .(근무일 = length(unique(date))), 
     by = .(id, 이름)
     ]
