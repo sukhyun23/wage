@@ -34,9 +34,9 @@ preprocess_basic <- function(data, holiday_date) {
   data[data$night == T, ]$end <- data[data$night == T, ]$end + 60*60*24
   
   # remove na 
-  data <- data[type != '휴일', ]
-  data <- data[!is.na(start) | !is.na(end), ]
-  data <- data[start != end, ]
+  data <- data[data$type != '휴일', ]
+  data <- data[!is.na(data$start) | !is.na(data$end), ]
+  data <- data[data$start != data$end, ]
   
   # total work hour 
   data$work_hour <- difftime(data$end, data$start, units = 'hours')
