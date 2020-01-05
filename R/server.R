@@ -122,7 +122,8 @@ server <- function(input, output) {
           c(
             'id', '이름', 'date', 'type', 'start',
             'end', 'day', 'work_hour', 'normal'
-          )
+          ),
+          with = F
         ],
         options = list(pageLength = 25)
       ),
