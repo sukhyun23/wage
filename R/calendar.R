@@ -9,7 +9,7 @@ calendar <- function(start, end) {
   no <- unlist(lapply(1:5, function(x) rep(x, 7)))
   calendar_df$no <- no[1:nrow(calendar_df)]
   
-  calendar_df_t <- dcast(
+  calendar_df_t <- data.table::dcast.data.table(
     calendar_df, 
     formula = no~weekdays, 
     value.var = 'date'

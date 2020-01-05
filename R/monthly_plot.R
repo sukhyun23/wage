@@ -5,7 +5,7 @@ monthly_plot <- function(data) {
   gdat$base_hour <- gdat$base_hour_day + gdat$base_hour_night
   gdat$y <- ifelse(gdat$base_hour <= 0, NA, gdat$y)
   
-  ydat <- unique(gdat[!is.na(y), .(y, 이름)])
+  ydat <- unique(gdat[!is.na(y), list(y, 이름)])
   ydat$x <- -0.8
   
   tmp_date <- as.Date(gdat$date)
