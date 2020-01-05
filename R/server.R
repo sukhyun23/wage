@@ -113,11 +113,17 @@ server <- function(input, output) {
   output$data_dt_output <- DT::renderDataTable({
     data <- ere_data()
     data$normal <- data$work_hour >= 0 # & data$work_hour <= 20
-    data <- data[order(normal, date), ]
+    data <- data[order(data$normal, data$date), ]
     
     DT::formatStyle(
       table = DT::datatable(
-        data[, .(id, 이름, date, type, start, end, day, work_hour, normal)],
+        data[
+          , 
+          c(
+            'id', '이름', 'date', 'type', 'start',
+            'end', 'day', 'work_hour', 'normal'
+          )
+        ],
         options = list(pageLength = 25)
       ),
       columns = 'normal',
