@@ -138,3 +138,5 @@ body <- dashboardBody(
     side_chart_content
   )
 )
+
+ui <- dashboardPage(header, sidebar, body)
