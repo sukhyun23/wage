@@ -31,7 +31,7 @@ preprocess_basic <- function(data, holiday_date) {
   
   data$start <- as.POSIXct(paste(data$date, data$start))
   data$end <- as.POSIXct(paste(data$date, data$end))
-  data[night == T, ]$end <- data[night == T, ]$end + 60*60*24
+  data[data$night == T, ]$end <- data[data$night == T, ]$end + 60*60*24
   
   # remove na 
   data <- data[type != '휴일', ]
