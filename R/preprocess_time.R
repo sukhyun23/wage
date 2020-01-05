@@ -1,4 +1,5 @@
 preprocess_time <- function(data) {
+  library(data.table)
   data <- data.table::data.table(data)
   
   # work day
