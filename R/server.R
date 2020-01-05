@@ -42,7 +42,6 @@ server <- function(input, output) {
     selection=list(target = "cell")
   )
   
-  
   # tmp
   output$tmp_print <- renderPrint({
     # print(ere_date())
