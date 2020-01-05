@@ -116,7 +116,7 @@ server <- function(input, output) {
     
     formatStyle(
       table = DT::datatable(
-        data[, .(id, 이름, date, type, start, end, day, work_hour, normal)],
+        data[, list(id, 이름, date, type, start, end, day, work_hour, normal)],
         options = list(pageLength = 25)
       ),
       columns = 'normal',
