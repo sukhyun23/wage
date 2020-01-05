@@ -5,8 +5,8 @@ import(ggplot2)
 import(shinydashboard)
 
 export(
-  calendar, pre_date, preprocess_basic, preprocess_time
-  summary_wage, montly_plot
+  calendar, pre_date, preprocess_basic, preprocess_time,
+  summary_wage, montly_plot, ui, server
 )
 
 # S3method("summary2", "Date")
