@@ -81,13 +81,14 @@ ui_app <- function() {
     placeholder = '선택된 파일이 없습니다.'
     # accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv")
   )
-  side_data_content <- shiny::tabItem(
+  
+  side_data_content <- shinydashboard::tabItem(
     tabName = "side_data",
     shiny::fluidPage(
       data_file_input,
       shiny::htmlOutput(outputId = 'data_text_output'),
       # textOutput(outputId = 'data_text_output'),
-      br(),
+      shiny::br(),
       shiny::column(
         width = 12,
         DT::dataTableOutput(outputId = 'data_dt_output')
@@ -96,7 +97,7 @@ ui_app <- function() {
   )
   
   # 4.3 (side bar) summary contents
-  side_summary_content <- shiny::tabItem(
+  side_summary_content <- shinydashboard::tabItem(
     tabName = "side_summary",
     shiny::fluidPage(
       shiny::downloadButton(outputId = 'summary_down_button', label = '다운받기'),
@@ -108,7 +109,7 @@ ui_app <- function() {
   )
   
   # 4.4 (side bar) chart contents
-  side_chart_content <- shiny::tabItem(
+  side_chart_content <- shinydashboard::tabItem(
     tabName = "side_chart",
     shiny::fluidPage(
       shiny::column(
