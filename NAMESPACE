@@ -6,7 +6,7 @@ import(shinydashboard)
 
 export(
   calendar, pre_date, preprocess_basic, preprocess_time,
-  summary_wage, montly_plot, ui_app, server
+  summary_wage, monthly_plot, ui_app, server
 )
 
 # S3method("summary2", "Date")
