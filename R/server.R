@@ -42,7 +42,6 @@ server <- function(input, output) {
     selection = list(target = "cell")
   )
   
-  
   # tmp
   output$tmp_print <- shiny::renderPrint({
     # print(ere_date())
@@ -139,8 +138,9 @@ server <- function(input, output) {
   ere_summary_data <- shiny::eventReactive(input$data_file_input, {
     data <- ere_data()
     data <- preprocess_time(data)
-    data <- ere_basic_data()[data, on = c('id', '이름'), nomatch = 0]
-    
+    data <- merge(ere_basic_data(), data, by = c('id', '이름'), all = T)
+    # data <- ere_basic_data()[data, on = c('id', '이름'), nomatch = 0]
+  
     summary_data <- summary_wage(data)
     return(summary_data)
   })

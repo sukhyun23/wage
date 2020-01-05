@@ -1,9 +1,4 @@
 summary_wage <- function(data) {
-  # worker_info <- readxl::read_xlsx('/home/sukhyun/wage_summary_shiny/worker_info.xlsx')
-  # worker_info <- worker_info %>% data.table()
-  # data <- worker_info[data, on = c('id', '이름'), nomatch = 0]
-  data <- data.table::data.table(data)
-  
   for (i in 1:ncol(data)) {
     data[[i]] <- ifelse(is.na(data[[i]]), 0, data[[i]])
   }
@@ -51,7 +46,7 @@ summary_wage <- function(data) {
     "소득세", "주민세", '소득세정산',  '공제합계',
     '차인지급액'
   )
-  data <- data[, vars_order, with = F]
+  data <- data[, vars_order]
   
   for (i in which(sapply(data, class) == 'numeric')) {
     data[[i]] <- floor(data[[i]])

@@ -1,11 +1,8 @@
 preprocess_basic <- function(data, holiday_date) {
-  data <- data.table::data.table(data)
-  
   # change names
   data <- data[
     ,
     c('번호', 'ID', '이름', '근무일자', '근무일명칭', '출근', '퇴근'),
-    with = F
   ]
   names(data) <- c('no', 'id', '이름', 'date', 'type', 'start', 'end')
   
