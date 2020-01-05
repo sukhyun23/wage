@@ -65,7 +65,7 @@ ui_app <- function() {
       shiny::column(
         width = 8,
         basic_date_input,
-        shiny::DTOutput(outputId = 'basic_dt_output'),
+        DT::DTOutput(outputId = 'basic_dt_output'),
         shiny::verbatimTextOutput('tmp_print')
       )
     )
