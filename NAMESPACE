@@ -1,0 +1,16 @@
+# useDynLib("tpa")
+
+import(dplyr)
+import(ggplot2)
+import(shinydashboard)
+
+export(
+  calendar, pre_date, preprocess_basic, preprocess_time
+  summary_wage, montly_plot
+)
+
+# S3method("summary2", "Date")
+# S3method("summary2", "POSIXct")
+
+# S3method("scaler", "data.frame")
+# S3method("predict", "scaler")

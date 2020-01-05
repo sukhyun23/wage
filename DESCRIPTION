@@ -1,0 +1,10 @@
+Package: wage
+Type: Package
+Title: Wage Calculator
+Version: 0.1.0
+Author: Sukhyun kwon
+Maintainer: Sukhyun kwon <shkwon23@gmail.com>
+Description: Calculating wage by month
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
