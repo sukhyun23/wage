@@ -1,5 +1,6 @@
 preprocess_basic <- function(data, holiday_date) {
   # data <- data_raw
+  data <- data.table(data)
   
   # change names
   data <- data[
