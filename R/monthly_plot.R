@@ -1,4 +1,4 @@
-montly_plot <- function(data) {
+monthly_plot <- function(data) {
   data <- data.table::data.table(data)
   
   gdat <- data

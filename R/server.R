@@ -165,7 +165,7 @@ server <- function(input, output) {
   
   ## 4. side chart 
   output$side_chart_plot_1 <- shiny::renderPlot({
-    montly_plot(ere_data())
+    monthly_plot(ere_data())
   })
   # output$side_chart_plot_2 <- renderPlot({
   #   gdat <- ere_summary_data()
