@@ -135,7 +135,7 @@ server <- function(input, output) {
   #  2.3 etc : download button
   output$data_down_button <- shiny::downloadHandler(
     filename = function() {
-      ds <- as.date(ere_data()$date[1])
+      ds <- pre_date(Sys.Date())
       y <- lubridate::year(ds)
       m <- lubridate::month(ds)
       paste(y, '_', m, '근로시간_데이터', '.xls', sep = '')
@@ -172,10 +172,11 @@ server <- function(input, output) {
     columnDefs = list(list(width = '85', targets = '_all'))
   )
   )
+  
   #  3.3 etc : download button
   output$summary_down_button <- shiny::downloadHandler(
     filename = function() {
-      ds <- as.date(ere_data()$date[1])
+      ds <- pre_date(Sys.Date())
       y <- lubridate::year(ds)
       m <- lubridate::month(ds)
       paste(y, '_', m, '임금요약', '.xls', sep = '')
