@@ -46,7 +46,7 @@ summary_wage <- function(data) {
     "소득세", "주민세", '소득세정산',  '공제합계',
     '차인지급액'
   )
-  data <- data[, vars_order]
+  data <- data[, which(names(data) %in% vars_order)]
   
   for (i in which(sapply(data, class) == 'numeric')) {
     data[[i]] <- floor(data[[i]])

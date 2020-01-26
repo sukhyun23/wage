@@ -17,6 +17,7 @@ server <- function(input, output) {
       for (i in file_paths) data_list[[i]] <- readxl::read_excel(i)
     } 
     data <- data.table::rbindlist(data_list)
+    data <- data.frame(data)
     return(data)
   })
   #  1.1 reactivity object : date range
@@ -44,12 +45,8 @@ server <- function(input, output) {
   
   # tmp
   output$tmp_print <- shiny::renderPrint({
-    # print(ere_date())
-    # print(class(ere_calendar_data()))
-    # print(input$basic_dt_output_cells_selected)
-    # print(ere_basic_data())
-    # print(re_holiday())
-    print(ere_data()[holiday == T, ])
+    
+    
   })
   # 1. 
   # observeEvent(input$action_basic, {
@@ -80,15 +77,19 @@ server <- function(input, output) {
     
     s_mat <- input$basic_dt_output_cells_selected
     re_holiday <- shiny::eventReactive(input$basic_date_input, {
+      s_mat <- as.data.frame(input$basic_dt_output_cells_selected)
       if (nrow(s_mat) == 0) {
         return(NA)
       } else {
-        holiday <- c()
-        for (i in 1:nrow(s_mat)) {
-          holiday[i] <- ere_calendar_data()[s_mat[i, 1], s_mat[i, 2]]
-        }
-        holiday <- as.Date(holiday, origin = '1970-01-01')
-        return(holiday)
+        s_matrix <- shiny::eventReactive(input$basic_date_input, s_mat)
+        ed <- ere_calendar_data()
+        holiday <- Map(
+          function(x, y) ed[[y]][x],
+          x = s_matrix()[[1]], y = s_matrix()[[2]]
+        )
+        return(unlist(holiday))
+        # holiday <- as.Date(holiday, origin = '1970-01-01')
+        # return(holiday)
       }
     })
     
@@ -154,8 +155,7 @@ server <- function(input, output) {
     data <- ere_data()
     data <- preprocess_time(data)
     data <- merge(ere_basic_data(), data, by = c('id', '이름'), all = T)
-    # data <- ere_basic_data()[data, on = c('id', '이름'), nomatch = 0]
-  
+    
     summary_data <- summary_wage(data)
     return(summary_data)
   })
@@ -200,3 +200,4 @@ server <- function(input, output) {
   #   ggplot(gdat, aes(x = id, y = sum)) + geom_bar(stat = 'identity', fill = 'blue')
   # })
 }
+

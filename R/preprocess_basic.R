@@ -37,7 +37,7 @@ preprocess_basic <- function(data, holiday_date) {
   
   # total work hour 
   data$work_hour <- difftime(data$end, data$start, units = 'hours')
-  data$work_hour <- round(data$work_hour) %>% as.numeric()
+  data$work_hour <- as.numeric(round(data$work_hour))
   
   # day 
   idx_tmp <- lubridate::day(data$start) >= lubridate::day(data$end)
