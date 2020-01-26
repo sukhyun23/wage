@@ -92,6 +92,7 @@ server <- function(input, output) {
       }
     })
     
+    data <- data.frame(data)
     data_pr <- preprocess_basic(data, re_holiday()) # re_holiday()
     return(data_pr)
   })
@@ -121,8 +122,8 @@ server <- function(input, output) {
           c(
             'id', '이름', 'date', 'type', 'start',
             'end', 'day', 'work_hour', 'normal'
-          ),
-          with = F
+          )
+          # with = F
         ],
         options = list(pageLength = 25)
       ),
