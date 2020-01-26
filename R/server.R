@@ -138,7 +138,7 @@ server <- function(input, output) {
       ds <- wage::pre_date(Sys.Date())
       y <- lubridate::year(ds)
       m <- lubridate::month(ds)
-      paste(y, '_', m, '근로시간_데이터', '.xls', sep = '')
+      paste(y, '_', m, '_', '근로시간_데이터', '.xls', sep = '')
     },
     content = function(file) {
       writexl::write_xlsx(x = ere_data(), path = file)
@@ -179,7 +179,7 @@ server <- function(input, output) {
       ds <- wage::pre_date(Sys.Date())
       y <- lubridate::year(ds)
       m <- lubridate::month(ds)
-      paste(y, '_', m, '임금요약', '.xls', sep = '')
+      paste(y, '_', m, '_', '임금요약', '.xls', sep = '')
     },
     content = function(file) {
       writexl::write_xlsx(x = ere_summary_data(), path = file)
