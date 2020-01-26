@@ -85,6 +85,7 @@ ui_app <- function() {
   side_data_content <- shinydashboard::tabItem(
     tabName = "side_data",
     shiny::fluidPage(
+      shiny::downloadButton(outputId = 'data_down_button', label = '다운받기'),
       data_file_input,
       shiny::htmlOutput(outputId = 'data_text_output'),
       # textOutput(outputId = 'data_text_output'),

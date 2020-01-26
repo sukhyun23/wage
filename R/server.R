@@ -132,6 +132,18 @@ server <- function(input, output) {
       backgroundColor = DT::styleEqual(c(1, 0), c('white', 'pink'))
     )
   })
+  #  2.3 etc : download button
+  output$data_down_button <- shiny::downloadHandler(
+    filename = function() {
+      y <- lubridate::year(Sys.Date())
+      m <- lubridate::month(Sys.Date())
+      paste(y, '_', m, '근로시간_데이터', '.xls', sep = '')
+    },
+    content = function(file) {
+      writexl::write_xlsx(x = ere_data(), path = file)
+      # write.csv(ere_summary_data(), file)
+    }
+  )
   
   
   ## 3. side summary
