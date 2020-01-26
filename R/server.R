@@ -135,8 +135,9 @@ server <- function(input, output) {
   #  2.3 etc : download button
   output$data_down_button <- shiny::downloadHandler(
     filename = function() {
-      y <- lubridate::year(Sys.Date())
-      m <- lubridate::month(Sys.Date())
+      ds <- as.date(ere_data()$date[1])
+      y <- lubridate::year(ds)
+      m <- lubridate::month(ds)
       paste(y, '_', m, '근로시간_데이터', '.xls', sep = '')
     },
     content = function(file) {
@@ -144,6 +145,7 @@ server <- function(input, output) {
       # write.csv(ere_summary_data(), file)
     }
   )
+  
   
   
   ## 3. side summary
@@ -173,8 +175,9 @@ server <- function(input, output) {
   #  3.3 etc : download button
   output$summary_down_button <- shiny::downloadHandler(
     filename = function() {
-      y <- lubridate::year(Sys.Date())
-      m <- lubridate::month(Sys.Date())
+      ds <- as.date(ere_data()$date[1])
+      y <- lubridate::year(ds)
+      m <- lubridate::month(ds)
       paste(y, '_', m, '임금요약', '.xls', sep = '')
     },
     content = function(file) {
