@@ -1,0 +1,23 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. 기본정보, 휴일 입력
+```{r, echo=FALSE}
+library(knitr)
+include_graphics('/home/sukhyun/wage/image/pagedata_1.png')
+```
+<br>  
+<br>  
+
+## 2. 근태 데이터 입력
+```{r, echo=FALSE}
+include_graphics('/home/sukhyun/wage/image/pagedata_2.png')
+```
+<br>  
+<br>  
+
+## 3. 계산 결과 확인, 다운로드
+```{r, echo=FALSE}
+include_graphics('/home/sukhyun/wage/image/pagedata_3.png')
+```
