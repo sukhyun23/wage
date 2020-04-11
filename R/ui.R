@@ -1,10 +1,9 @@
 ui_app <- function() {
-  # 2. header ---------------------------------------------------------------
+  # 3. header ---------------------------------------------------------------
   header <- shinydashboard::dashboardHeader(title = '현장 근로 관리')
   
   
-  
-  # 3. sidebar --------------------------------------------------------------
+  # 4. sidebar --------------------------------------------------------------
   sidebar <-   shinydashboard::dashboardSidebar(
     shinydashboard::sidebarMenu(
       shinydashboard::menuItem(
@@ -32,8 +31,8 @@ ui_app <- function() {
   
   
   
-  # 4. body -----------------------------------------------------------------
-  # 4.1 (side bar) basic contents
+  # 5. body -----------------------------------------------------------------
+  # 5.1 (side bar) basic contents
   basic_file_input <- shiny::fileInput(
     inputId = "basic_file_input",
     label = "사원 정보 엑셀 파일을 선택 하십시오.",
@@ -72,7 +71,7 @@ ui_app <- function() {
   )
   
   
-  # 4.2 (side bar) input contents
+  # 5.2 (side bar) input contents
   data_file_input <- shiny::fileInput(
     inputId = "data_file_input", 
     label = "계산할 엑셀 파일을 선택 하십시오.",
@@ -85,7 +84,10 @@ ui_app <- function() {
   side_data_content <- shinydashboard::tabItem(
     tabName = "side_data",
     shiny::fluidPage(
-      shiny::downloadButton(outputId = 'data_down_button', label = '다운받기'),
+      shinydashboard::box(
+        shiny::downloadButton(outputId = 'data_down_button', label = '다운받기'),
+        width = 2
+      ),
       data_file_input,
       shiny::htmlOutput(outputId = 'data_text_output'),
       # textOutput(outputId = 'data_text_output'),
@@ -97,19 +99,36 @@ ui_app <- function() {
     )
   )
   
-  # 4.3 (side bar) summary contents
+  # 5.3 (side bar) summary contents
   side_summary_content <- shinydashboard::tabItem(
     tabName = "side_summary",
-    shiny::fluidPage(
-      shiny::downloadButton(outputId = 'summary_down_button', label = '다운받기'),
+    fluidPage(
       shiny::column(
-        width = 12,
-        DT::dataTableOutput(outputId = 'summary_dt_output')
+        width = 6,
+        fluidRow(
+          shinydashboard::box(width = 12, status = "primary", title = h3('가공데이터'),
+                              shiny::downloadButton(
+                                outputId = 'summary_down_button1', label = '다운받기'
+                              ),
+                              DT::dataTableOutput(outputId = 'summary_dt_output1')  
+          )
+        )
+      ),
+      shiny::column(
+        width = 6,
+        fluidRow(
+          shinydashboard::box(width = 12, status = "primary", title = h3('임금 요약'),
+                              shiny::downloadButton(
+                                outputId = 'summary_down_button2', label = '다운받기'
+                              ),
+                              DT::dataTableOutput(outputId = 'summary_dt_output2')  
+          )
+        )
       )
     )
   )
   
-  # 4.4 (side bar) chart contents
+  # 5.4 (side bar) chart contents
   side_chart_content <- shinydashboard::tabItem(
     tabName = "side_chart",
     shiny::fluidPage(

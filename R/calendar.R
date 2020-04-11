@@ -1,6 +1,6 @@
 calendar <- function(start, end) {
   calendar_df <- data.table::data.table(date = seq(start, end, by = 1)) 
-  calendar_df$weekdays <- calendar_df$date %>% weekdays()
+  calendar_df$weekdays <- weekdays(calendar_df$date)
   calendar_df$weekdays <- substr(calendar_df$weekdays, 1, 1)
   calendar_df$weekdays <- factor(
     x = calendar_df$weekdays, 
