@@ -1,10 +1,7 @@
 
 
 ## 1. 기본정보, 휴일 입력  
-![page1](/home/sukhyun/wage/image/pagedata_1.png)
-<div id="bg">
-  <img src="/home/sukhyun/wage/image/pagedata_1.png" alt="">
-</div>  
+![page1](https://raw.githubusercontent.com/sukhyun23/wage/master/image/pagedata_1.png)
 <br>  
 <br>  
 
