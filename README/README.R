@@ -1,2 +1,1 @@
-knitr::knit('./README/README.Rmd'
-            
+knitr::knit('./README/README.Rmd')
